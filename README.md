@@ -1,2 +1,3 @@
 # genshinWishSimulator
-Trying to become better
+Trying to have fun while getting better at coding
+
