@@ -14,20 +14,20 @@ def chanceCalculator():
         fiveStarChance = random.randint(0, 2)
         if fiveStarChance == 1:
             characterChance = random.randint(0, len(fiveStarCharacters) - 1)
-            return "5 star: "+fiveStarCharacters[characterChance]
+            return ("5 star: "+fiveStarCharacters[characterChance], "5 Star")
         else:
             weaponChance = random.randint(0, len(fiveStarWeapons) - 1)
-            return "5 star: "+fiveStarWeapons[weaponChance]
+            return ("5 star: "+fiveStarWeapons[weaponChance], "5 Star")
     #For four stars (13 percent)
     elif 18 < chance < 149:
         fourStarChance = random.randint(0, 2)
         if fourStarChance == 1:
             characterChance = random.randint(0, len(fourStarCharacters) - 1)
-            return "4 star: "+fourStarCharacters[characterChance]
+            return ("4 star: "+fourStarCharacters[characterChance], "4 Star")
         else:
             weaponChance = random.randint(0, len(fourStarWeapons) - 1)
-            return "4 star: "+fourStarWeapons[weaponChance]
+            return ("4 star: "+fourStarWeapons[weaponChance], "4 Star")
     #Everything else (86.4 percent)
     else:
         threeStarChance = random.randint(0, len(threeStarWeapons) - 1)
-        return "3 star: "+threeStarWeapons[threeStarChance]
+        return ("3 star: "+threeStarWeapons[threeStarChance], "3 Star")
