@@ -13,6 +13,8 @@ pygame.font.init()
 
 clock = pygame.time.Clock()
 
+clock.tick(30)
+
 def drawFont(message, centerX, centerY, size, R, G, B):
     text = str(message)
     font1 = pygame.font.SysFont('Times', size)
@@ -27,38 +29,53 @@ def wishCircle(center, radius, R, G, B):
 def main():
     running = True
     text = "Press Space to Wish"
-    count = 0
+    wishCount = 0
     wishRed = 0
-    wishBlue = 130
+    wishBlue = 30
     wishGreen = 0
     wishType = ""
+    cooldown = False
     while running:
         screen.fill(backgroundColor)
+        if cooldown == True:
+            if wishType == "5 Star":
+                if wishRed < 255 and wishGreen < 215:
+                    wishRed += 1
+                    wishGreen += 1
+                else:
+                    wishRed = 0
+                    wishBlue = 130
+                    wishGreen = 0
+                    cooldown = False
+            elif wishType == "4 Star":
+                if wishRed < 240 and wishBlue < 255:
+                    wishRed += 1
+                    wishGreen += 1
+                else:
+                    wishRed = 0
+                    wishBlue = 130
+                    wishGreen = 0
+                    cooldown = False
+            else:
+                if wishBlue < 200:
+                    wishBlue += 1
+                else:
+                    wishBlue = 130
+                    cooldown = False
         wishCircle((screenWidth / 2, screenHeight / 2), 30, wishRed, wishGreen, wishBlue)
         message = text
         drawFont(message, screenWidth / 2, 400, 30, 0, 0, 0)
-        drawFont("Wishes: "+str(count), 50, 20, 20, 0, 0, 0)
+        drawFont("Wishes: "+str(wishCount), 50, 20, 20, 0, 0, 0)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE and cooldown == False:
                     wish, type = chanceCalculator()
                     text = wish
                     wishType = type
-                    if type == "5 Star":
-                        wishRed = 255
-                        wishGreen = 215
-                        wishBlue = 0
-                    elif type == "4 Star":
-                        wishRed = 255
-                        wishGreen = 0
-                        wishBlue = 215
-                    else:
-                        wishRed = 0
-                        wishGreen = 0
-                        wishBlue = 215
-                    count += 1
+                    wishCount += 1
+                    cooldown = True
 
         pygame.display.flip()
 
