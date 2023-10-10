@@ -21,11 +21,13 @@ def drawFont(message, centerX, centerY, size, R, G, B):
 
 def main():
     running = True
-    text = "Something"
+    text = "Press Space to Wish"
+    count = 0
     while running:
         screen.fill(backgroundColor)
         message = text
         drawFont(message, screenWidth / 2, 400, 30, 0, 0, 0)
+        drawFont("Wishes: "+str(count), 50, 20, 20, 0, 0, 0)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -33,6 +35,7 @@ def main():
                 if event.key == pygame.K_SPACE:
                     value = chanceCalculator()
                     text = value
+                    count += 1
 
         pygame.display.flip()
 
