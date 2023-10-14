@@ -28,6 +28,7 @@ def wishCircle(center, radius, R, G, B):
 
 
 def main():
+    check = 0
     running = True
     text = "Press Space to Wish"
     wishCount = 0
@@ -36,15 +37,15 @@ def main():
     wishGreen = 0
     wishType = ""
 
-    xPos = 70
-    yPos = 70
+    xPos = 100
+    yPos = 100
 
     radius = 30
     cooldown = False
     buffer = 0
     while running:
         screen.fill(backgroundColor)
-        if buffer % 2 == 0:
+        if buffer % 5 == 0:
             if cooldown == True:
                 if wishType == "5 Star":
                     if wishRed < 255 and wishGreen < 255:
@@ -73,16 +74,15 @@ def main():
         buffer += 1
         if xPos < screenWidth and yPos < screenHeight and cooldown == True:
             wishCircle((xPos, yPos), radius, wishRed, wishGreen, wishBlue)
-            xPos += 0.5
-            yPos += 0.5
+            xPos += 0.2
+            yPos += 0.2
         else:
             cooldown = False
-            for x in range(0, 1000):
-                if x % 3 == 0:
-                    wishCircle((xPos, yPos), radius, wishRed, wishGreen, 130)
-                    radius += 0.5
-        message = text
-        drawFont(message, screenWidth / 2, 400, 30, 0, 0, 0)
+            wishCircle((xPos, yPos), radius, wishRed, wishGreen, 130)
+            radius += 1
+            message = text
+            drawFont(message, screenWidth / 2, 400, 30, 0, 0, 0)
+
         drawFont("Wishes: "+str(wishCount), 50, 20, 20, 0, 0, 0)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -97,6 +97,7 @@ def main():
                     wishCount += 1
                     cooldown = True
                     radius = 30
+                    buffer = 0
 
         pygame.display.flip()
 
