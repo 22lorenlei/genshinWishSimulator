@@ -72,13 +72,18 @@ def main():
                         wishBlue = 0
                         cooldown = False
         buffer += 1
-        if xPos < screenWidth and yPos < screenHeight and cooldown == True:
+        if xPos < screenWidth and yPos < screenHeight and cooldown is True:
             wishCircle((xPos, yPos), radius, wishRed, wishGreen, wishBlue)
             xPos += 0.2
             yPos += 0.2
         else:
             cooldown = False
-            wishCircle((xPos, yPos), radius, wishRed, wishGreen, 130)
+            if wishType == "5 Star":
+                wishCircle((xPos, yPos), radius, 230,230, 0)
+            elif wishType == "4 Star":
+                wishCircle((xPos, yPos), radius, 255, 0, 255)
+            else:
+                wishCircle((xPos, yPos), radius, 0, 0, 230)
             radius += 1
             message = text
             drawFont(message, screenWidth / 2, 400, 30, 0, 0, 0)
