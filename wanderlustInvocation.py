@@ -8,7 +8,6 @@ fourStarWeapons = ["Favonius Warbow", "Rust", "Sacrifical Bow", "Stringless", "E
 threeStarWeapons = ["Raven Bow", "Sharpshooter's Oath", "Slingshot", "Emerald Orb", "Magic Guide", "Thrilling Tales of Dragon Slayers", "Bloodtainted Greatsword", "Debate Club", "Ferrous Shadow", "Black Tassel", "Cool Steel", "Harbinger of Dawn", "Skyrider Sword"]
 def chanceCalculator():
     chance = random.randint(1, 1001)
-
     #For five stars (1.6 percent)
     if 0 < chance < 17:
         fiveStarChance = random.randint(0, 2)
@@ -31,3 +30,4 @@ def chanceCalculator():
     else:
         threeStarChance = random.randint(0, len(threeStarWeapons) - 1)
         return ("3 star: "+threeStarWeapons[threeStarChance], "3 Star")
+

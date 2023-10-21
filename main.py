@@ -43,6 +43,9 @@ def main():
     radius = 30
     cooldown = False
     buffer = 0
+
+    fourStarPity = 0
+    fiveStarPity = 0
     while running:
         screen.fill(backgroundColor)
         if buffer % 5 == 0:
@@ -88,6 +91,8 @@ def main():
             message = text
             drawFont(message, screenWidth / 2, 400, 30, 0, 0, 0)
 
+        drawFont("Four Star Pity: "+str(fourStarPity), 75, 50, 20, 0, 0, 0)
+        drawFont("Five Star Pity: "+str(fiveStarPity), 75, 80, 20, 0, 0, 0)
         drawFont("Wishes: "+str(wishCount), 50, 20, 20, 0, 0, 0)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -100,6 +105,15 @@ def main():
                     text = wish
                     wishType = type
                     wishCount += 1
+                    if wishType == "4 Star":
+                        fourStarPity = 0
+                        fiveStarPity += 1
+                    elif wishType == "5 Star":
+                        fourStarPity += 1
+                        fiveStarPity = 0
+                    else:
+                        fourStarPity += 1
+                        fiveStarPity += 1
                     cooldown = True
                     radius = 30
                     buffer = 0
